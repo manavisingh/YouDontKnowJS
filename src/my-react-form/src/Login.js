@@ -7,13 +7,37 @@ export default class LoginForm extends Component {
         super(props);
         this.state = { value: 'personal' };
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.buttonClicked = "";
     }
 
+    getSubmitBtnSignUp(){
+        this.buttonClicked = "signup"
+        console.log(this.buttonClicked);
+    }
+
+    getSubmitBtnSignIn(){
+        this.buttonClicked = "signin"
+        console.log(this.buttonClicked);
+    }
+    
     handleFormSubmit(event) {
         event.preventDefault();
-        var url = '/test/url';
         var data = new FormData(event.target);
-        sendData(url, stringifyFormData(data));
+        var dataJson = JSON.parse(stringifyFormData(data));
+        if (this.buttonClicked === "signup"){
+            var url = '/register';
+            sendData(url, stringifyFormData(data));
+        }
+        else {
+            var url = '/login';
+            var dataToSend = {
+                "email" : dataJson.emailSignIn,
+                "password" : dataJson.passwordSignIn,
+                "amount" : dataJson.amount,
+                "product" : dataJson.product
+            }
+            sendData(url, JSON.stringify(dataToSend));
+        }
     }
 
     handleChange(event) {
@@ -22,7 +46,6 @@ export default class LoginForm extends Component {
 
     modalOpen(event) {
         var modalClickedClass = event.target.className;
-
         if (modalClickedClass.indexOf('apply') !== -1){
             this.setState({ 
                 modalSignIn: false,
@@ -74,8 +97,8 @@ export default class LoginForm extends Component {
                                     <button onClick={e => this.modalOpen(e)} type="button" className="apply login100-form-btn">Apply Now</button>
                                     <button onClick={e => this.modalOpen(e)} type="button" className="login login100-form-btn">Login</button>
                                 </div>
-                                <ModalSignUp show={this.state.modalSignUp} handleClose={e => this.modalClose(e)}></ModalSignUp>
-                                <ModalSignIn show={this.state.modalSignIn} handleClose={e => this.modalClose(e)}></ModalSignIn>
+                                <ModalSignUp show={this.state.modalSignUp} handleClose={e => this.modalClose(e)} submitButton={e => this.getSubmitBtnSignUp(e)}></ModalSignUp>
+                                <ModalSignIn show={this.state.modalSignIn} handleClose={e => this.modalClose(e)} submitButton={e => this.getSubmitBtnSignIn(e)}></ModalSignIn>
                             </div>
                         </form>
                     </div>
