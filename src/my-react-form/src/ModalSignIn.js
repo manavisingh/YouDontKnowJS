@@ -1,6 +1,6 @@
 import React from "react";
 
-const ModalSignIn = ({ handleClose, show, children, submitButton}) => {
+const ModalSignIn = ({ handleClose, show, children, submitButton, forgotPassword}) => {
     const showHideClassName = show ? "modal d-block" : "modal d-none";
     return (
         <div className={showHideClassName}>
@@ -15,7 +15,7 @@ const ModalSignIn = ({ handleClose, show, children, submitButton}) => {
                 </div>
                 <div className="loginBtnWrapper">
                     <button type="submit" form="loginForm" className="login100-form-btn modalSubmitBtn" onClick={submitButton}>Submit</button>
-                    <button type="button" form="loginForm" className="login100-form-btn modalSubmitBtn">Forgot Password?</button>
+                    <button type="button" form="loginForm" className="login100-form-btn modalSubmitBtn" onClick={forgotPassword}>Forgot Password?</button>
                 </div>
                 <button type="submit" className="login100-form-btn modalSubmitBtn signInCloseModal submitExistingUser">
                     <a href="javascript:;" className="modal-close" onClick={handleClose}>Close</a>

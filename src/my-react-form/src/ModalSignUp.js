@@ -11,19 +11,19 @@ const ModalSignUp = ({ handleClose, show, children, submitButton }) => {
                     <input type="text" name="name" className="form-control" id="name" aria-describedby="nameHelp" placeholder="Enter Name" />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="email">Email address</label>
+                    <label htmlFor="email">Email address*</label>
                     <input type="email" name="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="phone">Mobile No</label>
+                    <label htmlFor="phone">Mobile No*</label>
                     <input type="tel" name="phone" className="form-control" id="phone" aria-describedby="phoneHelp" placeholder="Enter Contact No" />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Password*</label>
                     <input type="password" name="password" className="form-control" id="password" placeholder="Password" />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="confirmPassword">Repeat Password</label>
+                    <label htmlFor="confirmPassword">Repeat Password*</label>
                     <input type="password" name="confirmPassword" className="form-control" id="confirmPassword" placeholder="Confirm Password" />
                 </div>
                 <button type="submit" form="loginForm" className="login100-form-btn modalSubmitBtn" onClick={submitButton}>Submit</button>

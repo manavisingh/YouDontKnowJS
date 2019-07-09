@@ -184,7 +184,7 @@ iframe {
   flex-direction: column;
   border-radius: 10px;
   background-color: #eee;
-  height: 500px;
+  height: 520px;
   left: 0;
 }
 
@@ -224,7 +224,7 @@ iframe {
 .wrap-input100 {
   width: 70%;
   border-bottom: 1px solid #e6e6e6;
-  padding: 29px 0;
+  padding: 10px 0 5px 0;
 }
 
 .input100 {
@@ -249,7 +249,7 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  margin-top: -15px;
+  margin-top: 20px;
 }
 
 .login100-form-btn {
@@ -314,7 +314,7 @@ input.input100[type="number"] {
     margin-top: 22px;
 }
 
-.modal-container {
+.modal-container, .emailSendMsg{
   position: fixed;
     top: 50%;
     left: 50%;
@@ -365,4 +365,56 @@ input.input100[type="number"] {
 
 .signInModalContainer button {
   margin-top: 42px;
+}
+
+.emailSentPopup, .forgotPasswordPopup {
+  font-size: 14px;
+    font-style: oblique;
+    width: 650px;
+    height: 550px;
+    background-color: azure;
+    border: solid 0.5px;
+    border-radius: 10px;
+    padding: 3%;
+}
+
+.container-login100 .emailSentBlock {
+  position: absolute;
+    display: flex!important;
+    justify-content: space-evenly;
+}
+
+.container-login100 .forgotPassBlock {
+  position: absolute;
+    display: flex!important;
+    justify-content: space-evenly;
+}
+
+.forgotPasswordPopup {
+  padding: 100px;
+}
+
+.sendPwdLinkBtn {
+  align-self: center;
+}
+
+footer p {
+  padding: 30px;
+}
+
+.loaderImg {
+  display: block;
+    height: 200px;
+    z-index: 4000;
+    width: 200px;
+    align-self: center;
+    margin-top: -300px;
+}
+
+.container .registerWrapper {
+  margin: 20px 0 20px 0;
+}
+
+.wrap-input100 input, .wrap-input100 label {
+  font-size: 14px;
 }
