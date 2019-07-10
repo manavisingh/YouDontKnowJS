@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ModalSignUp from './ModalSignUp';
 import ModalSignIn from './ModalSignIn';
 import EmailSent from './EmailSent';
 import PropTypes from 'prop-types';
 import ForgotPassword from './ForgotPassword';
+import {Link} from "react-router-dom";
 
 export default class LoginForm extends Component {
     constructor(props) {
@@ -21,10 +21,6 @@ export default class LoginForm extends Component {
         this.forgotPwd = false;
     }
 
-    static contextTypes = {
-        router: PropTypes.object,
-    }
-
     getSubmitBtnSignUp() {
         this.buttonClicked = "signup"
     }
@@ -39,13 +35,18 @@ export default class LoginForm extends Component {
         });
     }
 
+    toggleLoaderImg(state){
+        document.getElementsByClassName('preloader')[0].style.display = state;
+    }
+
     handleFormSubmit(event) {
         event.preventDefault();
         var data = new FormData(event.target);
         var dataJson = JSON.parse(stringifyFormData(data));
+        this.state.isLoading = true;
         if (this.buttonClicked === "signup") {
             console.log(this.buttonClicked);
-            var urlsignup = 'https://afraid-shrimp-93.localtunnel.me/register';
+            var urlsignup = 'http://13.235.126.110:3000/register';
             var dataToSendSignUp = {
                 "name": dataJson.name,
                 "email": dataJson.email,
@@ -60,7 +61,7 @@ export default class LoginForm extends Component {
                 mode: "cors",
                 body: JSON.stringify(dataToSendSignUp)
             }).then(response => {
-                this.state.isLoading = true;
+                this.state.isLoading = false;
                 if (response.ok) {
                     this.setState({
                         isLoading: false,
@@ -71,14 +72,6 @@ export default class LoginForm extends Component {
                 }
             })
         }
-        else {
-            var urlsignin = '/login';
-            var dataToSend = {
-                "email": dataJson.emailSignIn,
-                "password": dataJson.passwordSignIn
-            }
-            this.sendData(urlsignin, JSON.stringify(dataToSend), this, "signin");
-        }
     }
 
     handleChange(event) {
@@ -88,18 +81,10 @@ export default class LoginForm extends Component {
     modalOpen(event) {
         var modalClickedClass = event.target.className;
         console.log(modalClickedClass);
-        if (modalClickedClass.indexOf('apply') !== -1) {
-            this.setState({
-                modalSignIn: false,
-                modalSignUp: true
-            });
-        }
-        else {
-            this.setState({
-                modalSignUp: false,
-                modalSignIn: true
-            });
-        }
+        this.setState({
+            modalSignIn: true,
+            modalSignUp: false
+        });
     }
 
     sendData(url, data, e, signtype) {
@@ -154,21 +139,16 @@ export default class LoginForm extends Component {
                                     <input type="password" name="confirmPassword" className="form-control" id="confirmPassword" placeholder="Confirm Password" />
                                 </div>
                                 <div className="container-login100-form-btn">
-                                    {/* <button onClick={e => this.modalOpen(e)} type="button" className="apply login100-form-btn">Apply Now</button> */}
                                     <button type="submit" form="loginForm" className="login100-form-btn modalSubmitBtn" onClick={e => this.getSubmitBtnSignUp(e)}>Submit</button>
-                                    <button onClick={e => this.modalOpen(e)} type="button" className="login login100-form-btn">Already a CSL customer?</button>
+                                    <Link  to="/login" className="login login100-form-btn">Already a CSL customer?</Link>
                                 </div>
-                                {/* <ModalSignIn show={this.state.modalSignIn} handleClose={e => this.modalClose(e)} submitButton={e => this.getSubmitBtnSignIn(e)} forgotPassword={e => this.showForgotPassPage(e)}></ModalSignIn> */}
                             </div>
                             <EmailSent show={this.state.signupDone} ></EmailSent>
-                            <ForgotPassword show={this.state.forgotPass}></ForgotPassword>
-                            <img className="" style={{ display: (this.state.isLoading ? 'block' : 'none') }} src="https://thumbs.gfycat.com/LoneDetailedFairybluebird-max-1mb.gif"></img>
+                            {/* <img className="preloader" style={{display: none}} src="https://thumbs.gfycat.com/LoneDetailedFairybluebird-max-1mb.gif"></img> */}
                         </form>
                     </div>
                 </div>
-
             </div>
-
         );
     }
 }
