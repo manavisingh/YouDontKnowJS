@@ -37,3 +37,23 @@ function fullSort(arr){
 }
 
 fullSort([2,4,6,8,3,4,5,5,2,9,3,8,6]);
+
+function iSort(arr){
+    var length = arr.length;
+    for (var i = 0; i < length; i++){
+        var key = arr[i];
+        var j = i - 1;
+        while (j >= 0 && (arr[j] > key)){
+            arr[j+1] = arr[j];
+            j = j - 1;
+        }
+        arr[j+1] = key;
+    }
+}
+
+/*Better than bubble sort and selection sort;
+Best case is 0(n) if array is already sorted
+Worst O(n^2)
+Some implementations of those advanced algorithms will even switch from using their more advanced methodology to insertion sort when the list gets small enough.
+Sorts the list in place so space complexity is O(1)
+*/
