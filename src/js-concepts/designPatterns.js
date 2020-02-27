@@ -20,7 +20,8 @@ var you = new Person("shravan", 30, false);
 me.writesCode(); //"yes writes code"
 you.writesCode(); //"no does not write code"
 
-//Module Pattern: creating objects with private and public partsThese are called modules and are very useful whenever we want to hide certain parts of an object and only expose an interface to the user of the module
+//Module Pattern: creating objects with private and public partsThese are called modules and are very useful 
+//whenever we want to hide certain parts of an object and only expose an interface to the user of the module
 //Using Closures in the below example:
 
 var collection = (function(){
@@ -48,7 +49,10 @@ collection.getObjects(); //(3) ["manavi", "singh", "troy"]
 collection.removeObject("manavi"); 
 collection.getObjects(); //(2) ["singh", "troy"]
 
-//Revealing Module Pattern: This pattern is an improvement made to the module pattern as illustrated above. The main difference is that we write the entire object logic in the private scope of the module and then simply expose the parts we want to be public by returning an anonymous object. We can also change the naming of private members when mapping private members to their corresponding public members.
+//Revealing Module Pattern: This pattern is an improvement made to the module pattern as illustrated above. 
+//The main difference is that we write the entire object logic in the private scope of the module and then 
+//simply expose the parts we want to be public by returning an anonymous object. 
+//We can also change the naming of private members when mapping private members to their corresponding public members.
 
 //The above example has been enhanced here to explai revealing module pattern
 var collection2 = (function(){

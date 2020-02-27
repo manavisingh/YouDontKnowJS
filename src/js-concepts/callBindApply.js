@@ -45,3 +45,59 @@ getPokemonName.call(pokemon, "sushi", "coding");
 var arr = [3,7,5,8];
 Math.max.apply(Math, arr) //8;
 Math.max.call(Math, 3,7,5,8); //8
+
+
+//Using Bind - sometimes we lose the scope of this variable and its reference. In such cases we use bind to explicitly 
+//bind a function to an object that we pass as a param.
+//Example:
+
+var person = {
+    name: "manavi",
+    lastName: "singh",
+    getFullName: function(){
+        return this.name + " " + this.lastName;
+    }
+}
+
+var personInfo = function(snack,hobby){
+    console.log(this.getFullName() + "'s favourite snack is " + snack);
+    console.log(this.getFullName() + "'s hobby is " + hobby);
+}
+
+personInfo("chips","badminton"); //Uncaught TypeError: this.getFullName is not a function
+//We bind personInfo to object person and assign it to another variable like so:
+
+var bindPerson = personInfo.bind(person);
+bindPerson("chips","badminton");
+//Output ->
+//manavi singh's favourite snack is chips
+//manavi singh's hobby is badminton
+
+//Call and Apply
+/* Call: similar to bind except:
+    1. Accepts multiple parameters
+    2. Does not make a copy of the function it is being called on
+    3. Executes the function it was called on immediately
+*/
+
+//Example:
+var person = {
+    name: "manavi",
+    lastName: "singh",
+    getFullName: function(){
+        return this.name + " " + this.lastName;
+    }
+}
+
+var personInfo = function(snack,hobby){
+    console.log(this.getFullName() + "'s favourite snack is " + snack);
+    console.log(this.getFullName() + "'s hobby is " + hobby);
+}
+
+personInfo.call(person,"chips","badminton"); 
+//Output ->
+//manavi singh's favourite snack is chips
+//manavi singh's hobby is badminton
+
+//Apply: Similar to call but takes arguments in an array like so:
+personInfo.apply(person,["chips","badminton"]); //Same Output

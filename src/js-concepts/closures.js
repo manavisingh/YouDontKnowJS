@@ -113,5 +113,71 @@ var revealingModulePattern = (function(){
     }
 })();
 
+//Closure gone wrong
+function celebrityIDCreator (theCelebrities) {
+    var i;
+    var uniqueID = 100;
+    for (i = 0; i < theCelebrities.length; i++) {
+      theCelebrities[i]["id"] = function ()  {
+        return uniqueID + i;
+      }
+    }
+    
+    return theCelebrities;
+}
 
+var actionCelebs = [{name:"Stallone", id:0}, {name:"Cruise", id:0}, {name:"Willis", id:0}];
 
+var createIdForActionCelebs = celebrityIDCreator (actionCelebs);
+
+var stalloneID = createIdForActionCelebs [0];console.log(stalloneID.id()); // 103
+
+//Fixing the above by using IIFE
+function celebrityIDCreator (theCelebrities) {
+    var i;
+    var uniqueID = 100;
+    for (i = 0; i < theCelebrities.length; i++) {
+        theCelebrities[i]["id"] = function (j)  { // the j parametric variable is the i passed in on invocation of this IIFE
+            return function () {
+                return uniqueID + j; // each iteration of the for loop passes the current value of i into this IIFE and it saves the correct value to the array
+            } () // BY adding () at the end of this function, we are executing it immediately and returning just the value of uniqueID + j, instead of returning a function.
+        } (i); // immediately invoke the function passing the i variable as a parameter
+    }
+
+    return theCelebrities;
+}
+
+var actionCelebs = [{name:"Stallone", id:0}, {name:"Cruise", id:0}, {name:"Willis", id:0}];
+
+var createIdForActionCelebs = celebrityIDCreator (actionCelebs);
+
+var stalloneID = createIdForActionCelebs [0];
+console.log(stalloneID.id); // 100
+
+var cruiseID = createIdForActionCelebs [1];console.log(cruiseID.id); // 101
+
+//More such examples
+function closureGoneWrong(array){
+    var len = array.length;
+    for (var i = 0; i < len; i++){
+        incrementCounter = function(){
+            console.log(i);
+            return i;
+        }
+    }
+    return incrementCounter;
+}
+
+//More such examples
+function closureFixed(array){
+    var len = array.length;
+    for (var i = 0; i < len; i++){
+        incrementCounter = function(j){
+            return function(){
+                console.log(j);
+                return j;
+            }()
+        }(i)
+    }
+    return incrementCounter;
+}
