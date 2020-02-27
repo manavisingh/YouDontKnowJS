@@ -54,6 +54,7 @@ function iSort(arr){
 /*Better than bubble sort and selection sort;
 Best case is 0(n) if array is already sorted
 Worst O(n^2)
-Some implementations of those advanced algorithms will even switch from using their more advanced methodology to insertion sort when the list gets small enough.
+Some implementations of those advanced algorithms will even switch from using their more advanced methodology 
+to insertion sort when the list gets small enough.
 Sorts the list in place so space complexity is O(1)
 */

@@ -27,6 +27,7 @@ function bs(arr){
     return arr;
 }
 
-//Time complexity O(n^2); To code it in a more efficient manner is to keep track of whether values have been swapper before or not.
+//Time complexity O(n^2); To code it in a more efficient manner is to keep track of whether values have 
+//been swapper before or not.
 //swapped can be set to false; during each iteration, if the values are swapper then set the swapper to true;
 //Less efficient than insertion sort even with small sample sets
