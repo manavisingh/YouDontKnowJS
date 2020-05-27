@@ -15,3 +15,9 @@ function minMaxSum(a,b,c,d,e){
 }
 
 minMaxSum(1,2,3,4,5);
+
+
+//Apply
+
+var arr = [1,3,4,7];
+Math.max.apply(Math,arr);

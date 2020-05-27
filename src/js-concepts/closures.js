@@ -6,7 +6,7 @@ The closure has access to variables in three scopes; specifically:
 This is also an IIFE since it is immediately invoked
 */
 
-var global = "xyz";
+var globalVar = "xyz";
 (function outerFunc(outerArg){
     var outerVar = 'a';
     
@@ -31,7 +31,7 @@ for (var i = 0; i < 5; i++) {
 //5,5,5,5,5
 
 /* This happens because by the time console.log is executed, the for loop is already complete and the value is 5.
-To display the expected output, the value of i needs captured and given to console.log at each iteration like so: */
+To display the expected output, the value of i needs to be captured and given to console.log at each iteration like so: */
 
 for (var i = 0; i < 5; i++) {
 	(function(x){
@@ -122,7 +122,6 @@ function celebrityIDCreator (theCelebrities) {
         return uniqueID + i;
       }
     }
-    
     return theCelebrities;
 }
 
@@ -181,3 +180,122 @@ function closureFixed(array){
     }
     return incrementCounter;
 }
+
+
+
+/*********************************/
+
+//CLosures Practice
+
+(function outerFunc(outerArg){
+    var outerVar = "outer";
+    (function innerFunc(innerArg){
+        var innerVar = "inner";
+        console.log(
+            outerVar + "\n" +
+            outerArg + "\n" +
+            innerArg + "\n" + 
+            innerVar + "\n"
+        )
+    })(230);
+})(540);
+
+//Problem:
+function timeout(){
+    for (var i = 0; i < 6; i++){
+        setTimeout(function(){console.log(i)},1000);
+    }
+}
+
+//Fix using closures
+(function closureIteration(){
+    for (var i = 0; i < 6; i++){
+        (function(x){
+            setTimeout(function(){console.log(x)},x*1000)
+        })(i)
+    }
+})()
+
+//Modular Pattern
+var modPatter = (function(first){
+    var prefix = "Full Name is: ";
+    var fullName;
+    var inner = function(last){
+        fullName = prefix + first + " " + last;
+    }
+    return {
+        publicMethod: function(last){
+            inner(last);
+            return fullName
+        }
+    }
+})("manavi")
+
+var revealModFunc = (function(){
+    var prefix = "My name is: ";
+    var privateMethod1 = function(firstName,lastName){
+        var fullName = prefix + firstName + lastName;
+        return fullName;
+    }
+    var publicMethod1 = function(first,last){
+        privateMethod1(first,last);
+    }
+    return {
+        one: function(first,last){
+            publicMethod1(first,last)
+        }
+    }
+})()
+
+//closureWrong
+
+function closure1(array){
+    var len = array.length;
+    for (var i = 0; i < len; i++){
+        incrementCounter = function(){
+            return i;
+        }
+    }
+    return incrementCounter;
+}
+closureGoneWrong([1,3,4])() //3
+
+function closureFixed(array){
+    var len = array.length;
+    for (var i = 0; i < len; i++){
+        incrementCounter = function(j){
+            return function(){
+                console.log(j)
+                return j
+            }
+        }(i)
+    }
+    return incrementCounter;
+}
+
+function closureFixed(array){
+    var len = array.length;
+    for (var i = 0; i < len; i++){
+        incrementCounter = function(j){
+            return function(){
+                console.log(j);
+                return j;
+            }()
+        }(i)
+    }
+    return incrementCounter;
+}
+
+
+var outerFunc = (function(outerArg){
+    var outerVar = 3;
+    (function innerFunc(innerArg){
+        var innerVar = 6;
+        console.log(
+            outerArg + '\n' + 
+            outerVar + '\n' + 
+            innerArg + '\n' + 
+            innerVar
+        )
+    })(40)
+})(80)
