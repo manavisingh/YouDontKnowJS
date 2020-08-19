@@ -181,8 +181,6 @@ function closureFixed(array){
     return incrementCounter;
 }
 
-
-
 /*********************************/
 
 //CLosures Practice
@@ -299,3 +297,34 @@ var outerFunc = (function(outerArg){
         )
     })(40)
 })(80)
+
+
+//youtube - simple closure
+
+var addOuter = function(passed){
+    var addInner = function(inner){
+        return passed + inner;
+    }
+    return addInner;
+}
+
+var addThree = new addOuter(4);
+addThree(6) //10
+
+
+/* *********** */
+var modFunction = function(firstName){
+    let prefix = "My Name is: ";
+    let privateMethod = function(second){
+        let fullName = prefix + firstName + second;
+        return fullName;
+    }
+    return {
+        publicMethod: function(secondName){
+            return privateMethod(secondName);
+        }
+    }
+}
+
+modFunction('manavi').publicMethod('singh')
+//"My Name is: manavisingh"

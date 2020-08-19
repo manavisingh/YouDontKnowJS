@@ -113,3 +113,29 @@ var speak = function(line){
 var object = {type: "White Rabbit"}
 speak.call(object,"hi"); //The White Rabbit says hi
 speak.apply(object,["hello"]) //The White Rabbit says hello
+
+/* ********** */
+
+let getInfo = function(hometown){
+    console.log(this.name + " from " + hometown);
+}
+
+var me = {
+    name: "manavi"
+}
+
+getInfo.call(me,'kanpur');
+
+//Bind
+
+let me = {
+    name: 'manavi',
+    place: 'kanpur',
+    getInfo: function(){
+        return (this.name + ' from ' + this.place);
+    }
+}
+
+let bindMe = function(){
+    console.log("Info " + this.getInfo());
+}

@@ -1,4 +1,5 @@
-//TYPE 1: Given a sorted list with an unsorted number E in the rightmost cell, can you write some simple code to insert E  into the array so that it remains sorted?
+//TYPE 1: Given a sorted list with an unsorted number E in the rightmost cell,
+// can you write some simple code to insert E  into the array so that it remains sorted?
 
 function sortArr(n,arr){
     for (var i = n; i >= 0; i--){
