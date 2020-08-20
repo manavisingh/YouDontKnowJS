@@ -21,7 +21,9 @@ logPokemon(); //the name is: pikachu
 
 /* 2. Call and apply: The call() method calls a function with a given this value and arguments provided individually.
 What that means, is that we can call any function, and explicitly specify what this should reference within the calling function. 
-call() and apply() serve the exact same purpose. The only difference between how they work is that call() expects all parameters to be passed in individually, whereas apply() expects an array of all of our parameters. */
+call() and apply() serve the exact same purpose. The only difference between how they work is that call() expects all parameters to be passed in individually,
+whereas apply() expects an array of all of our parameters. 
+*/
 
 //Example 1:
 
