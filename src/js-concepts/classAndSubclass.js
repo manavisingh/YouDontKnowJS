@@ -21,11 +21,12 @@ class Square extends Rectangle {
         this.h = s;
         this.w = s;
     }
-
 }
 
-JSON.stringify(Object.getOwnPropertyNames(Square.prototype)) //JSON.stringify([ 'constructor' ]) which means Sqaure has only one
-//constructor and no methods but uses the area method of Rectangle to print its area
+JSON.stringify(Object.getOwnPropertyNames(Square.prototype)) 
+
+//The above is equal to => JSON.stringify([ 'constructor' ]) which means Sqaure has only one
+//constructor and no methods but can use the area method of Rectangle to print its area
 
 const rec = new Rectangle(3, 4);
 const sqr = new Square(3);

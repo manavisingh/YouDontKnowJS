@@ -96,3 +96,35 @@ x1()
 
 //x.val => 9
 //^ no change in the x.val even if function order is changed
+
+//Immutability - an object cant be modified after it is created
+
+//example: mutable object
+
+const mutObject = {
+    name: "manavi",
+    age: 19
+}
+mutObject.name = "singh" //changes the name property hence mutable
+
+//example: immutable object
+
+const immutObject = Object.freeze({
+    name: "manavi",
+    age: 19
+})
+
+immutObject.name = "singh" //does not change the name of the object
+
+//However - this works only on the the top level of the object. example:
+
+const immutObject = Object.freeze({
+    name: "manavi",
+    age: 19,
+    innerObj : {
+        nameInner: "singh",
+        ageInner: 30
+    }
+})
+
+immutObject.innerObj.nameInner = "shravan" //changes the inner object's name

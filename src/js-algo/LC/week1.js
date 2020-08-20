@@ -54,3 +54,13 @@ var maxSubArray = function(nums){
 }
 
 maxSubArray([-2,1,-3,4,-1,2,1,-5,4]);
+
+//#4
+var moveZeroes = function(nums) {
+    var temp;
+    for (var i = 0; nums.length; i--){
+        if (nums[i] === 0){
+
+        }
+    }
+};

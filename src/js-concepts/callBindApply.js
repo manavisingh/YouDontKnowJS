@@ -1,4 +1,5 @@
-//1. bind(): The bind() method creates a new function that, when called, has its this keyword set to the provided value. It let’s us explicitly define the value of this when calling a function
+//1. bind(): The bind() method creates a new function that, when called, has its this keyword set to the provided value. 
+//It let’s us explicitly define the value of this when calling a function
 
 var pokemon = {
     name: "pika",
@@ -14,15 +15,15 @@ var getPokemonName = function(){
 
 pokemonName() //VM294:11 Uncaught TypeError: this.getPokeName is not a function.
 
-//created a new object and binds pokemon, now: this of pokemon is pokemon
+//created a new object and binds pokemon, now: this in getPokemonName function refers to the pokemon object
 var logPokemon = getPokemonName.bind(pokemon);
 
 logPokemon(); //the name is: pikachu
 
 /* 2. Call and apply: The call() method calls a function with a given this value and arguments provided individually.
-What that means, is that we can call any function, and explicitly specify what this should reference within the calling function. 
-call() and apply() serve the exact same purpose. The only difference between how they work is that call() expects all parameters to be passed in individually,
-whereas apply() expects an array of all of our parameters. 
+What that means, is that we can call any function, and explicitly specify what this should reference within the calling 
+function. call() and apply() serve the exact same purpose. The only difference between how they work is that 
+call() expects all parameters to be passed in individually, whereas apply() expects an array of all of our parameters. 
 */
 
 //Example 1:
@@ -103,3 +104,38 @@ personInfo.call(person,"chips","badminton");
 
 //Apply: Similar to call but takes arguments in an array like so:
 personInfo.apply(person,["chips","badminton"]); //Same Output
+
+//Call and Apply example
+var speak = function(line){
+    console.log("The " + this.type + " says " + line);
+}
+
+var object = {type: "White Rabbit"}
+speak.call(object,"hi"); //The White Rabbit says hi
+speak.apply(object,["hello"]) //The White Rabbit says hello
+
+/* ********** */
+
+let getInfo = function(hometown){
+    console.log(this.name + " from " + hometown);
+}
+
+var me = {
+    name: "manavi"
+}
+
+getInfo.call(me,'kanpur');
+
+//Bind
+
+let me = {
+    name: 'manavi',
+    place: 'kanpur',
+    getInfo: function(){
+        return (this.name + ' from ' + this.place);
+    }
+}
+
+let bindMe = function(){
+    console.log("Info " + this.getInfo());
+}

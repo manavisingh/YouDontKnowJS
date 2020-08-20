@@ -35,7 +35,7 @@ Hard Disk: 2024
 /*
 2. Constructor Pattern
 - does not create a new object
-- uses the 'new' operator to create instance
+- uses 'this' and 'new' operator to create instance
 - does not return the object
 */
 
@@ -67,7 +67,7 @@ Hard Disk: 2024
 /*
 3. Prototype Pattern
 - every JS object has a prototype space
-- it first creates a blank object and assign properties and functions to it
+- it first creates a blank object and assign properties and functions to it using .prototype
 - then it uses the new operator to create a blank object and assign ACTUAL values to it
 */
 
@@ -115,5 +115,65 @@ protoObj3.hasOwnProperty("ram") //false
 //Reason: 'in' operator searches for the properties first in the object and then in its prototypes
 // 'hasOwnProperty' searches for the properties only in the object's roots
 
+/*
+4. Dynamic Prototype Pattern
+- combination of consturtor and prototype patter
+- we create properties like in the constuctor pattern
+- if the the member function does not exist, we create it in the prototype space
+*/
 
+//Example:
+var DynamicObject = function(ram,hardDisk){
+    this.ram = ram;
+    this.hardDisk = hardDisk;
+    if (typeof availableMemory !== 'function'){
+        DynamicObject.prototype.availableMemory = function(){
+            console.log("RAM: " + this.ram);
+            console.log("Hard Disk: " + this.hardDisk);
+        };
+    }
+};
+
+var dynamicObj1 = new DynamicObject(4,1024);
+
+/*******************************/
+
+//1. Simple Object Creation:
+
+var person = {};
+person.name = "manavi";
+person.speaks = function(line){
+    console.log(this.name + " says: " + line);
+}
+
+person.speaks("hi");
+
+//2. Constructor method using this
+var person = function(name,line){
+    this.name = name;
+    this.speaks = function(){
+        console.log(this.name + " says: " + line);
+    }
+}
+
+var me = {name: "manavi", person: person}
+me.speaks("helloooo");
+
+
+
+//factory:
+
+var factoryObject = function (ram, hardDisk) {
+    var newObject = {};
+    newObject.ram = ram;
+    newObject.hardDisk = hardDisk;
+    newObject.availableMemory = function () {
+        // console.log("ram: " + ram);
+        // console.log("Hard Disk: " + hardDisk);
+        return ram + " " + hardDisk
+    }
+    return newObject;
+}
+
+var fac1 = factoryObject(8,1024);
 
